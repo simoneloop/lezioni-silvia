@@ -40,7 +40,7 @@ public class Cicli {
 		System.out.println(c);
 		
 		Random randomGenerator=new Random();
-		int index=randomGenerator.nextInt(1,13);//Uguale a randomGenerator.nextInt(12)+1; //overloading è la sovrascrizione di un metodo passandogli diversi parametri
+		int index=randomGenerator.nextInt(12)+1;//Uguale a randomGenerator.nextInt(12)+1; //overloading è la sovrascrizione di un metodo passandogli diversi parametri
 		System.out.println("mese dell'anno di indice: "+index);
 		if(index==1) {
 			System.out.println("è gennaio");

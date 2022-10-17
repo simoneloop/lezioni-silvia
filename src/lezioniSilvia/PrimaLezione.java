@@ -1,6 +1,6 @@
 package lezioniSilvia;
 
-import java.util.*;
+//import java.util.*;
 
 public class PrimaLezione {
 	public static void main(String[]args) {
@@ -15,11 +15,11 @@ public class PrimaLezione {
 //		non numerici:
 //			boolean
 //			char
-		int i,a,c;//dichiarazione ma non inizializzazione
+		int i,a;//dichiarazione ma non inizializzazione
 		i=0;
-		a=1;c=2;
-		double d=3.14;
-		float f=3.14f;
+		a=1;
+		//double d=3.14;
+		//float f=3.14f;
 		a=(int)3.14;
 		//System.out.println("a prima era 3.14 ora è: "+a);
 		
@@ -28,7 +28,7 @@ public class PrimaLezione {
 		System.out.println("questo è ln");
 		System.out.println("di nuovo normale");
 		System.out.println(a++);//incremento post istruzione printerà 3
-		System.out.println(++a);//incremento pre istruzione printerà 4
+		System.out.println(++i);//incremento pre istruzione printerà 4
 		
 		int y=10/8;//restituisce il quoziente
 		System.out.println("il quoziente di 10/8 è: "+y);

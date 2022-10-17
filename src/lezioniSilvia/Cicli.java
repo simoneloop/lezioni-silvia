@@ -33,7 +33,7 @@ public class Cicli {
 		//operatore ternario
 		int a=2;
 		int b=2;
-		boolean aMajorB=a>b?true:false;
+		//boolean aMajorB=a>b?true:false;
 		int c=a>b?1:-1;//se a>b c>0; se a<b c<0;se a=b c=0 //importante
 		System.out.println(c);
 		c=a>b?1:a==b?0:-1;//se a>b c>0; se a<b c<0;se a=b c=0 //molto meno importante

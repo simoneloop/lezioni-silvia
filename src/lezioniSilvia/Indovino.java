@@ -4,6 +4,7 @@ import java.util.*;
 public class Indovino {
 	public static void main(String[]args) {
 		Scanner sc=new Scanner(System.in);
+		//System.out.print(sc);
 		int max=10;
 		int random=(int)(Math.random()*max)+1;
 	

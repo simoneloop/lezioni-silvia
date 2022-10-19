@@ -1,8 +1,5 @@
 package lezioniSilvia.Esercizi;
 //scrivere un programma che stampa su console x,y(interi da 1 a 10 ) random, e prende in input z
-//restituisce true solo se x+z=z
-	
-//con il while true
 import java.util.*;
 public class Esercizio1 {
 	public static void main(String [] args) {

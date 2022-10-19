@@ -14,7 +14,7 @@ public class Stringhe {
 		String sottotitolo=new String(arraySottotitolo);
 		
 		System.out.println(arraySottotitolo[1]);
-		System.out.println(sottotitolo.charAt(1));
+		System.out.println(sottotitolo.charAt(4));
 	}
 	
 	

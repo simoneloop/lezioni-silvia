@@ -9,12 +9,12 @@ public class Esercizio2 {
 		Scanner sc= new Scanner(System.in);
 		int a=sc.nextInt();
 		int count=0;
-		while(a>0) {
+		while(a>0) {//TODO warning giallo- essendo la condizione di uscita un numero negativo ed essendo 0 un numero positivo 0 dovrebbe essere incluso >=0 o <0
 			int b=sc.nextInt();
 			if (b>a) {
 				count++;
 				a=b;
-			}
+			}//TODO warning verde- a=b viene eseguita sia nell'if che nell'else tanto vale scriverla fuori da entrambi per evitare di ripetere ed eliminare quindi else in questo caso
 			else {
 				a=b;
 			}

@@ -9,6 +9,7 @@ public class Esercizio1 {
 			int x =(int)(Math.random()*max)+1;
 			int y =(int)(Math.random()*max)+1;
 			Scanner sc = new Scanner(System.in);
+			//System.out.println("I valori x e y sono: x= "+x+" y= "+y);
 			System.out.println("Quale può essere la somma tra x e y?");
 			int z= sc.nextInt();
 			int somma=x+y;

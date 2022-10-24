@@ -32,8 +32,8 @@ public class esercizio5 {
 		return -1; //se non viene trovato l'elemento restituiamo -1
 	}
 	public static void main(String[]args) {
-		int[]v={1,4,6,5,3,8,2,7};
-		int x=7;
+		int[]v={1,4,6,5,3,8,2,7,0,1};
+		int x=18;
 		ordinaLista(v); //se la lista non è ordinata non si può fare una ricerca binaria
 		System.out.print("La lista ordinata è: ");
 		for(int k=0; k<v.length; k++) {

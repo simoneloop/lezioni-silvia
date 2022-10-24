@@ -28,3 +28,8 @@ public class Esercizio6 {
 		return y;
 	}	
 }
+
+//x=8
+//0-8 =mediana 4----7
+//x>array[4]
+//[1,2,3,4,5,6,7,8,9]

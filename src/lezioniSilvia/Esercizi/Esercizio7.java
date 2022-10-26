@@ -118,6 +118,7 @@ public class Esercizio7 {
 	//i punti di sella sono quegli indici che corrispondo ad un punto che sia maggiore di tutti i valori nella 
 	//sua riga ma minore di tutti i valori nella sua colonna
 
+	
 	static int[] puntiDiSella(int[][]m) {
 		int[]posizione= new int[2];
 		for(int i=0; i<m.length; i++) {
@@ -151,14 +152,16 @@ public class Esercizio7 {
 //	1,1,1
 //	1,1,1
 //costante magica =3
+	
 	static boolean isMagicSquare(int[][]m){
 		if(m.length!= m[0].length) {
 			System.out.println("Non può essere un quadrato magico perché ha dimensioni diverse");
 			System.exit(-1);
 		}
 		int costanteMagica=0;
+		int diagonale=0;
 		for (int i=0; i<m.length; i++) {
-			int diagonale=0;
+			
 			int righe=0;
 			int colonne=0;
 			for(int j=0; j<m[i].length; j++) {
@@ -167,21 +170,78 @@ public class Esercizio7 {
 				if(i==j) {
 					diagonale+=m[i][j];
 				}
-				if(i==0) {
-					costanteMagica=righe;
-				}
-				if(costanteMagica!=righe || costanteMagica!= colonne) {
-					//System.out.print(false);
-					return false;
-				}
-				if(costanteMagica!=diagonale) {
-					//System.out.print(false);
-					return false;
-				}
+				
 			}
+			
+			if(i==0) {
+				costanteMagica=righe;
+			}
+			if(costanteMagica!=righe || costanteMagica!= colonne) {
+				//System.out.print(false);
+				return false;
+			}
+			
+		}
+		if(costanteMagica!=diagonale) {
+			//System.out.print(false);
+			return false;
 		}
 		//System.out.print(true);
 		return true;
+
+	}
+	
+	
+	static boolean isMagicSquareDEI(int[][]m){
+		if(m.length!= m[0].length) {
+			System.out.println("Non può essere un quadrato magico perché ha dimensioni diverse");
+			System.exit(-1);
+		}
+		int sommaCol=0;
+		int sommaR=0;
+		int sommaDiagP=0;
+		int sommaDiagS=0;
+		
+		
+		for (int i=0;i<m.length;i++) {
+			int sommaRTmp=0;
+			for(int j=0;j<m.length;j++) {
+				sommaRTmp+=m[i][j];
+			}
+			if(sommaR!=0 && sommaR!=sommaRTmp) {
+				return false;
+			}
+			else {sommaR=sommaRTmp;}
+			
+		}
+		
+		
+		
+		for (int i=0;i<m.length;i++) {
+			int sommaCTmp=0;
+			for(int j=0;j<m.length;j++) {
+				sommaCTmp+=m[j][i];
+			}
+			if(sommaCol!=0 && sommaCol!=sommaCTmp) {
+				return false;
+			}
+			else if(sommaCol!=0 &&sommaCol!=sommaR) {
+				return false;
+			}
+			else {sommaCol=sommaCTmp;}
+		}
+		
+
+		for(int i=0;i<m.length;i++) {
+			sommaDiagP+=m[i][i];
+			sommaDiagS+=m[i][m.length-1-i];
+		}
+		
+		if(sommaDiagP==sommaDiagS && sommaDiagS==sommaCol) {
+			return true;
+		}
+		else {return false;}
+		
 
 	}
 	

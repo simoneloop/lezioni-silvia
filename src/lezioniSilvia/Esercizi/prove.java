@@ -1,63 +1,52 @@
 package lezioniSilvia.Esercizi;
 
+import java.util.Scanner;
+
 public class prove { 
 	public static void main(String[]args) {
-		int[][] m= {{1,2,3},{4,5,6},{7,8,9}};
-		puntiDiSella(m);
-		System.out.println("La matrice è un cubo magico? "+ cuboMagico(m));
+		int[][]m= new int[3][3];
+		leggiEScrivi(m);
+		verificaCelle(m);
 	}
-	static void puntiDiSella(int[][]m) {
-		int[]posizione= new int[2];
-		for(int i=0; i<m.length; i++) {
-			int min= m[i][0];
-			int indice=0;
-			boolean condizione= true;
-			for(int j=1; j<m[i].length; j++) {
-				if(m[i][j]<min) {
-					min=m[i][j];
-					indice=j;
-				}
-			}
-			for (int j=0; j<m.length; j++) {
-				if(m[j][indice]>min) {
-					condizione= false;
-				}
-			
-			}
-			if(condizione) {
-				posizione[0]=i;
-				posizione[1]=indice;
-				
-				System.out.println("Il punto di sella è: " +min+" in posizione: "+posizione[0]+","+posizione[1]);
-			}
+	static boolean verificaCelle(int[][]m1){
+		if(m1.length!=m1[0].length) {
+			System.out.println("non è possibile moltiplicare queste due matrici");
+			System.exit(-1);	
 		}
-	}
-	static boolean cuboMagico(int[][]m) {
-		int costanteMagica=0;
-		for (int i=0; i<m.length; i++) {
-			int diagonale=0;
-			int righe=0;
-			int colonne=0;
-			for(int j=0; j<m[i].length; j++) {
-				righe+=m[i][j];
-				colonne+=m[j][i];
-				if(i==j) {
-					diagonale+=m[i][j];
-				}
-				if(i==0) {
-					costanteMagica=righe;
-				}
-				if(costanteMagica!=righe || costanteMagica!= colonne) {
-					//System.out.print(false);
-					return false;
-				}
-				if(costanteMagica!=diagonale) {
-					//System.out.print(false);
-					return false;
+		boolean verifica=true;
+		for(int i=2; i<m1.length && verifica; i++) {
+			for(int j=0; j<m1[0].length; j++) {
+				if(m1[i][j]<m1[i-1][j]+m1[i-2][j]) {
+					verifica=false;
 				}
 			}
 		}
-		//System.out.print(true);
-		return true;
-	}
+		return verifica;
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	static void leggiEScrivi(int[][]m) {
+		Scanner sc= new Scanner(System.in);
+		System.out.println("Inserisci i valori che compongono la matrice: ");
+		for(int i=0;i<m.length;i++) {
+			for(int j=0;j<m[i].length;j++) {
+				m[i][j]=sc.nextInt();
+			}
+		}
+		for(int i=0;i<m.length;i++) {
+			for(int j=0;j<m[i].length;j++) {
+				System.out.print(" "+m[i][j]);
+			}
+			System.out.println();
+		}
+	}	
 }

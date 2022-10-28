@@ -100,18 +100,26 @@ public class Esercizio7 {
 	
 	//una matrice quadrata è simmetrica se coincide con la sua trasposta
 	static boolean simmetrica(int[][]m) {
-		int[][]t= trasposta(m);
-		for(int i=0;i<m.length;i++) {
-			for(int j=0;j<m[0].length;j++) {
-				if(t[i][j]==m[i][j]) {
-//					System.out.println("La matrice m1 è simmetrica? ");
-//					System.out.println(true);
-					return true;
+		int [][]tras= trasposta(m);
+		int count=1;
+		int righe= m.length;
+		int colonne= m[0].length;
+		if(righe==colonne) {
+			for(int i=0; i<righe; i++) {
+				for(int j=0;j<colonne; j++) {
+					if(m[i][j]!= tras[i][j]) {
+						count=0;
+						break;
+					}
+				}
+				if(count==0) {
+					return false;
 				}
 			}
+			if(count==1) {
+				return true;
+			}
 		}
-//		System.out.println("La matrice m1 è simmetrica? ");
-//		System.out.println(false);
 		return false;
 	}
 	//il metodo restituisce i punti di sella di una matrice 

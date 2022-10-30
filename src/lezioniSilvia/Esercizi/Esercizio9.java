@@ -10,7 +10,7 @@ public class Esercizio9 {
 				 		{0,1,0},
 				 		{1,0,1}};
 		//leggiEScrivi(matrice);	
-		System.out.println("La matrice è una scacchiera? "+verificaScacchiera(matrice));
+		System.out.println("La matrice è una scacchiera? "+verificaNew(matrice));
 	}																
 	
 																	//avvalersi del supporto di un booleano
@@ -122,7 +122,31 @@ public class Esercizio9 {
 		return true;
 	}
 	
-	
+	static boolean verificaNew(int[][]m) {
+		int prev=m[0][0];
+
+		for(int i=0;i<m.length;i++) {
+			for(int j=0;j<m.length;j++) {
+				if(m[i][j]!=1 && m[i][j]!=0) { //mi assicuro che non ci siano altri elementi se non 0 e 1
+					return false;
+				}
+				//mi assicuro che non sono al primo elemento controllando che o non sono alla riga 0(a qualsiasi colonna va bene allora)
+				//o non sono alla colonna 0(va bene a qualsiasi riga allora) 
+				//o entrambe
+				else if(i!=0 || j!=0) { 
+					if(m[i][j]==prev) {//se è uguale al precedente torno false
+						return false;
+					}
+					if(i>0 && m[i-1][j]==m[i][j]) {//se sono dalla seconda riga in poi posso controllare i numeri immediatamente sopra
+						return false;
+					}
+				}
+				prev=m[i][j];//aggiorno il precedente
+			}
+			
+		}
+		return true;
+	}
 	
 	
 	

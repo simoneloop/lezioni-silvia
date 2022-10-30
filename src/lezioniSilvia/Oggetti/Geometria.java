@@ -54,6 +54,7 @@ public class Geometria {
 		System.out.println(Razionale.razionaliCreati());
 		
 		
+		
 	}
 
 }

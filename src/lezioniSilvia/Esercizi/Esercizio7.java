@@ -109,7 +109,9 @@ public class Esercizio7 {
 				for(int j=0;j<colonne; j++) {
 					if(m[i][j]!= tras[i][j]) {
 						count=0;
-						break;
+						//poteva semplicemente tornare ora false e alla fine tornare true
+						return false;
+						
 					}
 				}
 				if(count==0) {

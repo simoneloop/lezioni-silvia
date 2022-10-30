@@ -14,13 +14,13 @@ public class Esercizio8 {
 				sommaRigheS=0;
 				for(int j=0; j<m[0].length; j++) {
 					sommaRigheS+=m[i][j];
-					System.out.println("Il valore della prima riga è: "+sommaRigheS);
+					System.out.println("Il valore della riga "+i+" è: "+sommaRigheS);
 				}
-				for(i=m.length-1; i>0;i--) {
+				for(i=m.length-1; i>0;i--) {//non si usa lo stesso indice
 					sommaRigheI=0;
 					for(int j=0; j<m[0].length; j++) {
 						sommaRigheI+=m[i][j];
-						System.out.println("Il valore dell'ultima riga è: "+sommaRigheI);
+						System.out.println("Il valore della riga " +i+ "  è: "+sommaRigheI);
 					}
 					if(sommaRigheS==sommaRigheI) {
 						System.out.println("La somma è uguale? "+sommaRigheS+" == "+sommaRigheI+"?");
@@ -32,6 +32,26 @@ public class Esercizio8 {
 			}	
 			return false;
 	}
+	
+	static boolean sommaPalindromaRigheOk(int[][]m) {
+		int sommaRigheS=0;
+		int sommaRigheI=0;
+		for(int i=0;i<m.length;i++) {
+			if(i<m.length/2) {
+				for(int j=0;j<m[0].length;j++) {
+					sommaRigheS+=m[i][j];
+					sommaRigheI+=m[m.length-1-i][j];
+				}
+				if(sommaRigheS!=sommaRigheI) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	
+	
 	static boolean sommaPalindromaColonne(int[][]m) {
 		int sommaColonneS;
 		int sommaColonneI;
@@ -56,11 +76,13 @@ public class Esercizio8 {
 			}	
 			return false;
 	}
+	
+	
 	static void verificaMatricePalindroma(int[][]m) {
 		if(sommaPalindromaRighe(m) && sommaPalindromaColonne(m)) {
 			System.out.println("La matrice è palindroma sia sulle righe sia sulle colonne");
 		}
-		else if(sommaPalindromaRighe(m)) {
+		else if(sommaPalindromaRigheOK(m)) {
 			System.out.println("La matrice è palindroma solo sulle righe");
 		}
 		else if(sommaPalindromaColonne(m)){
@@ -71,8 +93,12 @@ public class Esercizio8 {
 		}
 	}
 	public static void main(String[]args) {
-		int[][] matrice= new int[4][4];
-		leggiEScrivi(matrice);
+		//int[][] matrice= new int[4][4];
+		int[][]matrice= {{1,0,1,1},
+						{1,0,1,1},
+		 		        {1,1,1,1},
+		 		        {1,0,1,1}};
+		//leggiEScrivi(matrice);
 		verificaMatricePalindroma(matrice);
 		
 	}

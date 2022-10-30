@@ -4,9 +4,13 @@ import java.util.*;
 
 public class Esercizio9 {
 	public static void main(String[]args) { 						//010
-		int[][] matrice= new int[3][3];								//101
-		leggiEScrivi(matrice);										//010 sì scacchiera
-		System.out.println("La matrice è una scacchiera? "+eUnaScacchiera(matrice));
+		//int[][] matrice= new int[3][3];								//101
+											//010 sì scacchiera
+		int[][]matrice= {{1,0,1},
+				 		{0,1,0},
+				 		{1,0,1}};
+		//leggiEScrivi(matrice);	
+		System.out.println("La matrice è una scacchiera? "+verificaScacchiera(matrice));
 	}																
 	
 																	//avvalersi del supporto di un booleano
@@ -52,6 +56,74 @@ public class Esercizio9 {
 		}
 		return false;
 	}
+	
+//	static boolean verificaScacchiera(int[][]m) {
+//		int prev=m[0][0];
+//		if(prev!=0 && prev!=1) {
+//			System.out.println("non è una scacchiera");
+//			return false;
+//		}
+//		for(int i=0;i<m.length;i++) {
+//			for(int j=0;j<m[0].length;j++) {
+//				if(m[i][j]!=0 && m[i][j]!=1) {
+//					System.out.println("non è una scacchiera");
+//					return false;
+//				}
+//				else {
+//					
+//					if(i!=0 ) {
+//						if(m[i][j]==prev) {
+//							System.out.println("non è una scacchiera");
+//							return false;
+//						}
+//						else {prev=m[i][j];}
+//						if(i>0) {
+//							if(m[i][j]==m[i-1][j]) {
+//								System.out.println("non è una scacchiera");
+//								return false;
+//							}
+//						}
+//					}
+//					
+//					
+//				}
+//			}
+//		}
+//		return true;
+//		
+//	}
+	
+	static boolean verificaScacchiera(int[][]m) {
+		boolean res;
+		res=false;
+		
+		for(int i=0;i<m.length;i++) {
+			for(int j=0;j<m.length;j++) {
+				if(m[i][j]!=1 && m[i][j]!=0) {
+					System.out.println("nony è una scacchiera");
+					System.exit(-1);
+				}
+				else {
+					if(m[i][j]==0 && !res) {
+						res=!res;
+					}
+					else if(m[i][j]==1 && res) {
+						res=!res;
+					}
+					if(i>0) {
+						if(m[i][j]==m[i-1][j]) {
+							System.out.println("non è una scacchiera");
+							System.exit(-1);
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	
+	
 	
 	
 	

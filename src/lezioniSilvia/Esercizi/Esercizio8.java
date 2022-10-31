@@ -8,32 +8,6 @@ import java.util.*;
 
 public class Esercizio8 {
 	static boolean sommaPalindromaRighe(int[][]m) {
-		int sommaRigheS;
-		int sommaRigheI;
-			for(int i=0; i<m.length;i++) {
-				sommaRigheS=0;
-				for(int j=0; j<m[0].length; j++) {
-					sommaRigheS+=m[i][j];
-					System.out.println("Il valore della riga "+i+" è: "+sommaRigheS);
-				}
-				for(i=m.length-1; i>0;i--) {//non si usa lo stesso indice
-					sommaRigheI=0;
-					for(int j=0; j<m[0].length; j++) {
-						sommaRigheI+=m[i][j];
-						System.out.println("Il valore della riga " +i+ "  è: "+sommaRigheI);
-					}
-					if(sommaRigheS==sommaRigheI) {
-						System.out.println("La somma è uguale? "+sommaRigheS+" == "+sommaRigheI+"?");
-						return true;
-						
-					}
-				}
-				break;
-			}	
-			return false;
-	}
-	
-	static boolean sommaPalindromaRigheOk(int[][]m) {
 		int sommaRigheS=0;
 		int sommaRigheI=0;
 		for(int i=0;i<m.length;i++) {
@@ -53,36 +27,28 @@ public class Esercizio8 {
 	
 	
 	static boolean sommaPalindromaColonne(int[][]m) {
-		int sommaColonneS;
-		int sommaColonneI;
-			for(int i=0; i<m.length;i++) {
-				sommaColonneS=0;
-				for(int j=0; j<m[0].length; j++) {
+		int sommaColonneS=0;
+		int sommaColonneI=0;
+		for(int i=0;i<m.length;i++) {
+			if(i<m.length/2) {
+				for(int j=0;j<m[0].length;j++) {
 					sommaColonneS+=m[j][i];
-					System.out.println("Il valore della prima riga è: "+sommaColonneS);
+					sommaColonneI+=m[i][m.length-1-j];
 				}
-				for(i=m.length-1; i>0;i--) {
-					sommaColonneI=0;
-					for(int j=0; j<m[0].length; j++) {
-						sommaColonneI+=m[j][i];
-						System.out.println("Il valore dell'ultima riga è: "+sommaColonneI);
-					}
-					if(sommaColonneS==sommaColonneI) {
-						System.out.println("La somma è uguale? "+sommaColonneS+" == "+sommaColonneI+"?");
-						return true;
-					}
+				if(sommaColonneS!=sommaColonneI) {
+					return false;
 				}
-				break;
-			}	
-			return false;
-	}
+			}
+		}
+		return true;
+	}	
 	
 	
 	static void verificaMatricePalindroma(int[][]m) {
 		if(sommaPalindromaRighe(m) && sommaPalindromaColonne(m)) {
 			System.out.println("La matrice è palindroma sia sulle righe sia sulle colonne");
 		}
-		else if(sommaPalindromaRigheOK(m)) {
+		else if(sommaPalindromaRighe(m)) {
 			System.out.println("La matrice è palindroma solo sulle righe");
 		}
 		else if(sommaPalindromaColonne(m)){

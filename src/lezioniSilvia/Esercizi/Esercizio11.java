@@ -37,7 +37,7 @@ public class Esercizio11 {
 		return true;
 	}
 	public static void main(String[] args) {
-		int[][]matrix= {{1,1,3,4},{2,3,4,5},{3,4,5,6},{4,5,6,7}};
+		int[][]matrix= {{1,1,2,4},{2,2,4,8},{3,3,6,12},{4,4,8,16}};
 		System.out.println("La matrice ha tutte le celle uguali alla somma delle celle precedenti? "+verificaCelle(matrix));
 	}
 

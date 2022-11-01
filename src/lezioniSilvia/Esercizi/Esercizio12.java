@@ -34,7 +34,10 @@ public class Esercizio12 {
 		return false;	
 	}
 	public static void main(String[]args) {
-		int[][]matrix= {{1,1,1,1},{2,3,1,1},{3,4,5,1},{3,5,6,7}};
+		int[][]matrix= {{1,100,1,1},
+						{2,3,1,1},
+						{3,4,5,1},
+						{3,5,6,7}};
 		System.out.println("La somma del triangolo superiore alla diagonale principale è maggiore della somma del triangolo inferiore della stessa? "+verificaSomme(matrix));
 	}
 }

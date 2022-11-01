@@ -1,5 +1,7 @@
 package lezioniSilvia.Oggetti;
 
+import lezioniSilvia.Eccezioni.DENNULLException;
+
 public class Razionale {
 	//è un semplice rapporto tra due numeri interi
 	//gli oggetti che andremo a creare sono oggetti immutabili quindi ogni operazione aritmetica non modifica this ma crea un nuovo razionale
@@ -15,10 +17,11 @@ public class Razionale {
 	private static int contatore=0;//classe
 	
 	
-	public Razionale(int num,int den) {
+	public Razionale(int num,int den)throws Exception {
 		if(den==0) {
 			System.out.println("il denominatore non può essere 0");
 			System.exit(-1);
+			//throw new DENNULLException();
 		}
 		if(num!=0) {
 			int n=Math.abs(num);
@@ -35,12 +38,27 @@ public class Razionale {
 		this.DEN=den;
 		
 		
-		
-		
-		
-		
 		contatore++;
 	}
+	public int getNUM() {
+		return NUM;
+	}
+	public int getDEN() {
+		return DEN;
+	}
+	
+	public Razionale mul(Razionale r) throws Exception {
+		return new Razionale(r.NUM*NUM,DEN*r.DEN);
+	}
+	
+	public Razionale mul(int s) throws Exception {
+		return new Razionale(s*NUM,DEN);
+	}
+	
+	public Razionale div(Razionale r) throws Exception {
+		return new Razionale(NUM*r.DEN,r.NUM*DEN);
+	}
+	
 	
 	private int mcd(int x,int y) {
 		do {

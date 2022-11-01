@@ -143,7 +143,6 @@ public class Esercizio9 {
 				}
 				prev=m[i][j];//aggiorno il precedente
 			}
-			
 		}
 		return true;
 	}

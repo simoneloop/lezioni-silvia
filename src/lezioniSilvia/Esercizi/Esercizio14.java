@@ -1,17 +1,34 @@
 package lezioniSilvia.Esercizi;
-
-
-//public class Monetina
+import lezioniSilvia.Eccezioni.*;
 public class Esercizio14 {
 	
-	//creare una classe monetina con un campo intero "faccia", e due costanti pubbliche "testa" e "croce"(già inizializzate a 0 e 1)
-	//e i seguenti metodi:
-	//costruttore di default che lancia inizialmente la monetina per impostare la faccia
-	//lancia() che fissa casualmente la faccia della monetina(tra testa e croce)
-	//getFaccia() ritorna (intero) la faccia attuale della monetina
-	//toString() ritorna in stringa la faccia corrente della monetina
+	//check n_regine
+	//data una matrice quadrata di booleani che rappresenta una scacchiera dove il valore true significa che c'è una regina nella cella e false significa cella vuota
+	//il metodo torna true se e solo se le n regine non vanno in contrasto tra di loro
 	
-	//una volta creato l'oggetto
-	//creare un programma basato su monetina, che crea due monetine m1 e m2 e le lancia ripetutamente, fino a che una delle due non realizza 3 testa consecutive.
+	
+//	[true,false,false]
+//	[false,false,true]
+//	[false,false,false]	ritorna true
+	
+//	[true,false,false]
+//	[false,false,true]
+//	[false,false,true] ritorna false
 
+	
+	//al posto di tornare false; lancia MatriceNonValidaException
+	public static void main(String[]args) throws Exception {
+		boolean[][]m= {{true,false,false},{false,false,true},{false,false,false}};
+		System.out.println("La scacchiera ha regine in contrasto tra loro? "+verificaRegine(m));
+	}
+	
+	static boolean verificaRegine(boolean[][]m) throws Exception  {
+		for (int i=0;i<m.length; i++) {
+			for(int j=0; j<m[0].length; j++) {
+				
+				
+			}
+		}
+	return true;
+	}
 }

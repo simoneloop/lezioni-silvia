@@ -19,16 +19,60 @@ public class Esercizio14 {
 	//al posto di tornare false; lancia MatriceNonValidaException
 	public static void main(String[]args) throws Exception {
 		boolean[][]m= {{true,false,false},{false,false,true},{false,false,false}};
-		System.out.println("La scacchiera ha regine in contrasto tra loro? "+verificaRegine(m));
+		System.out.println("La scacchiera non ha regine in contrasto tra loro? "+verificaRegine(m));
+//		System.out.println("Non ci sono altre regine sulla stessa colonna? "+verificaColonne(m));
+//		System.out.println("Non ci sono altre regine sulla stessa diagonale? "+verificaDiagonaleDaSxADx(m));
+//		System.out.println("Non ci sono altre regine sulla stessa diagonale secondaria? "+verificaDiagonaleDaDxASx(m));
 	}
 	
 	static boolean verificaRegine(boolean[][]m) throws Exception  {
-		for (int i=0;i<m.length; i++) {
+		if(verificaColonne(m) && verificaDiagonaleDaSxADx(m) && verificaDiagonaleDaDxASx(m)) {
+			return true;
+		}
+	return false;
+	}
+	static boolean verificaColonne(boolean[][]m) {
+		for(int i=0; i<m.length; i++) {
 			for(int j=0; j<m[0].length; j++) {
-				
-				
+				if(m[i][j]==true) {
+					for(int k=i+1; k<m.length; k++) {
+						if(m[k][j]==true) {
+							return false;
+						}
+					}
+				}
 			}
 		}
-	return true;
+		return true;
+	}
+	static boolean verificaDiagonaleDaSxADx(boolean[][]m) {
+		for(int i=0; i<m.length; i++) {
+			for(int j=0; j<m[0].length; j++) {
+				if(m[i][j]==true) {
+					for(int k=i+1; k<m.length; k++) {
+						if(m[k][k]==true) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+	static boolean verificaDiagonaleDaDxASx(boolean[][]m) {
+		for(int i=0; i<m.length; i++) {
+			for(int j=0; j<m[0].length; j++) {
+				if(m[i][j]==true && j>0) {
+					for(int k=j-1; k<m.length-1; k--) {
+						for(int x=i+1; x<m.length-1; x++) {
+							if(m[x][k]==true) {
+								return false;
+							}
+						}
+					}
+				}
+			}
+		}
+		return true;
 	}
 }

@@ -75,6 +75,8 @@ public class Collezioni {
 		cars.add("volk");
 		cars.get(2);
 		
+		System.out.println(cars.toArray());
+		
 		ListIterator i=cars.listIterator();
 //		while(i.hasNext()) {
 //			if(i.next().equals("volvo")) {
@@ -110,7 +112,10 @@ public class Collezioni {
 		listaConc.aggiungiInTesta(3);
 		System.out.println(listaConc);
 		
-
+		Integer []d= {5,3,1,0,2,-2,4,6,-9};
+		ListaConcatenataInt aa=new ListaConcatenataInt(d);
+		int c=10;
+		System.out.println(aa.contaElementiSpeciali(c));
 		
 		
 	}

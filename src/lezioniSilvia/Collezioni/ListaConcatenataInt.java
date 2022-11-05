@@ -175,4 +175,134 @@ public class ListaConcatenataInt {
 		lunghezza--;
 	}
 	
+	public int contaElementiSpeciali(int b) {
+		if(testa==null) {
+			return 0;
+		}
+		return contaElementiSpeciali(testa,b,0,0);
+	}
+	private int contaElementiSpeciali(NodoInt nodo,int b, int sommaPrecedenti, int contatore ) {
+		if(nodo==null) {
+			return contatore;
+		}
+		if(nodo.getInfo()> b-sommaPrecedenti) {
+			return contaElementiSpeciali(nodo.getSuccessivo(),b, sommaPrecedenti+nodo.getInfo(), contatore+1);
+		}
+			
+		return contaElementiSpeciali(nodo.getSuccessivo(),b, sommaPrecedenti+nodo.getInfo(),contatore);
+	}
+	
+	public void rimuoviPrimo(int info) {
+		if(eVuota()) {
+			return;
+		}
+		if(testa.haInfo(info)) {
+			rimuoviTesta();
+			return;
+		}
+		for(NodoInt n=testa;n!=null;n=n.getSuccessivo()) {
+			NodoInt successivoAdN=n.getSuccessivo();
+			if(successivoAdN!=null && successivoAdN.haInfo(info)) {
+				n.setSuccessivo(successivoAdN.getSuccessivo());
+				if(successivoAdN==coda) {
+					coda=n;
+				}
+				lunghezza--;
+				return;
+			}
+		}
+	}
+	
+	public void rimuoviTutti(int info) {
+		if(eVuota()) {
+			return;
+		}
+		while(testa!=null &&testa.haInfo(info)) {
+			rimuoviTesta();
+		}
+		NodoInt n=testa;
+		while(n!=null) {
+			NodoInt successivoAdN=n.getSuccessivo();
+			if(successivoAdN!=null && successivoAdN.haInfo(info)) {
+				n.setSuccessivo(successivoAdN.getSuccessivo());
+				lunghezza--;
+				if(successivoAdN==coda) {
+					coda=n;
+				}	
+			}
+			else {
+				n=successivoAdN;
+			}
+		}
+	}
+	
+	public int indiceDi(int info) {
+		int pos=0;
+		for(NodoInt n=testa;n!=null;n=n.getSuccessivo()) {
+			if(n.haInfo(info)) {
+				return pos;
+			}
+			pos++;
+		}
+		return -1;
+	}
+	
+	public int[] indiceDiTutti(int info) {
+		int cnt=conta(info);
+		if(cnt==0) {
+			return null;
+		}
+		int [] ret=new int[cnt];
+		int posLibera=0;
+		int indiceLista=0;
+		for(NodoInt n=testa;n!=null;n=n.getSuccessivo()) {
+			if(n.haInfo(info)) {
+				ret[posLibera]=indiceLista;
+				posLibera++;
+			}
+			indiceLista++;
+		}
+		return ret;
+	}
+	
+	public boolean contiene(int info) {
+		return indiceDi(info)!=-1;
+	}
+	
+	public ArrayList<Integer> adArrayList(){
+		ArrayList<Integer>res=new ArrayList<>();
+		for(NodoInt n=testa;n!=null;n=n.getSuccessivo()) {
+			res.add(n.getInfo());
+		}
+		return res;
+		
+	}
+	public int[] adArray() {
+		if(eVuota()) {
+			throw new EccezioneListaVuota();
+		}
+		int [] res=new int[lunghezza];
+		int posLibera=0;
+		for(NodoInt n=testa;n!=null;n=n.getSuccessivo()) {
+			res[posLibera]=n.getInfo();
+			posLibera++;
+		}
+		return res;
+	}
+	
+	
+	private int contaDa(NodoInt n,int info) {
+		if(n==null) {
+			return 0;
+		}
+		return (n.haInfo(info)?1:0)+contaDa(n.getSuccessivo(),info);
+	}
+	
+	public int conta(int info) {
+		return contaDa(testa,info);
+	}
+	
+	
+	
+	
 }

@@ -3,6 +3,7 @@ package lezioniSilvia.Collezioni;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Map;
 
 import lezioniSilvia.Eccezioni.EccezioneListaVuota;
 
@@ -73,9 +74,8 @@ public class Collezioni {
 		cars.addFirst("audi");
 		cars.add("volvo");
 		cars.add("volk");
-		cars.get(2);
+		//cars.get(2);
 		
-		System.out.println(cars.toArray());
 		
 		ListIterator i=cars.listIterator();
 //		while(i.hasNext()) {
@@ -114,9 +114,8 @@ public class Collezioni {
 		
 		Integer []d= {5,3,1,0,2,-2,4,6,-9};
 		ListaConcatenataInt aa=new ListaConcatenataInt(d);
-		int c=10;
-		System.out.println(aa.contaElementiSpeciali(c));
-		
+		String albero="alber";
+		String alfa="alfa";
 		
 	}
 }

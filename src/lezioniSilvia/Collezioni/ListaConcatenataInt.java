@@ -302,6 +302,67 @@ public class ListaConcatenataInt {
 		return contaDa(testa,info);
 	}
 	
+	public boolean equals(Object o) {
+		if(o==null) {return false;}
+		if(o==this) {return true;}
+		if(!(o instanceof ListaConcatenataInt)) {
+			return false;
+		}
+		ListaConcatenataInt l=(ListaConcatenataInt) o;
+		if(this.lunghezza!=l.lunghezza) {return false;}
+		NodoInt n=testa;
+		NodoInt nl=l.testa;
+		
+		while(n!=null ) {
+			if(n.getInfo()!=nl.getInfo()) {
+				return false;
+			}
+			n=n.getSuccessivo();
+			nl=nl.getSuccessivo();
+		}
+		return true;
+	}
+	
+	public int somma() {
+		return sommaDa(testa);
+	}
+	
+	private int sommaDa(NodoInt n) {
+		if(n==null) {
+			return 0;
+		}
+		return n.getInfo()+sommaDa(n.getSuccessivo());
+	}
+	
+	private int minimoDa(NodoInt n) {
+		NodoInt successivoAdN=n.getSuccessivo();
+		if(successivoAdN==null) {
+			return n.getInfo();
+		}
+		return Math.min(n.getInfo(), minimoDa(successivoAdN));
+	}
+	
+	public int minimo() {
+		if(eVuota()) {
+			throw new EccezioneListaVuota();
+		}
+		return minimoDa(testa);
+	}
+	
+	private int massimoDa(NodoInt n) {
+		NodoInt successivoAdN=n.getSuccessivo();
+		if(successivoAdN==null) {
+			return n.getInfo();
+		}
+		return Math.max(n.getInfo(), massimoDa(successivoAdN));
+	}
+	
+	public int massimo() {
+		if(eVuota()) {
+			throw new EccezioneListaVuota();
+		}
+		return massimoDa(testa);
+	}
 	
 	
 	

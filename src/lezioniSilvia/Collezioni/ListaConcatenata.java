@@ -2,9 +2,6 @@ package lezioniSilvia.Collezioni;
 
 import java.util.ArrayList;
 
-import lezioniCorsoJava.lezione10.ListaConcatenata;
-import lezioniCorsoJava.lezione10.Nodo;
-
 class Nodo<E>{
 	private E info;
 	private Nodo<E> successivo;

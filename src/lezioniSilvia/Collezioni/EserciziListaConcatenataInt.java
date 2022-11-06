@@ -29,10 +29,10 @@ public class EserciziListaConcatenataInt{
 		return contaElementiSpeciali(nodo.getSuccessivo(),b, sommaPrecedenti+nodo.getInfo(),contatore);
 	}
 	public static void main(String[] args) {
-		Integer []a={5,3,1,0,2,-2,4,6,-9};
+		Integer []a={2,3,7,-1,-3,-4,-5,8,11,20};
 		ListaConcatenataInt lista=new ListaConcatenataInt(a);
 		int b=9;
-		System.out.println(lista);
+		//System.out.println(lista);
 		System.out.println("res: "+lista.contaElementiSpeciali(b));
 		
 	}

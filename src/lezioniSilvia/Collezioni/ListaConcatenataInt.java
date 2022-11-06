@@ -364,6 +364,43 @@ public class ListaConcatenataInt {
 		return massimoDa(testa);
 	}
 	
-	
+//APPELLO 11/07/2022
+//Si arricchisca la classe ListaConcatenataInt sviluppata durante il corso con un metodo boolean 
+//verificaOrdinamento() che verifica se la lista è formata da sequenze di valori positivi e negativi che soddisfano 
+//le seguenti condizioni:
+//	▪ tutte le sequenze di valori positivi sono ordinate in modo crescente;
+//	▪ tutte le sequenze di valori negativi sono ordinate in modo decrescente.
+//Ad esempio, la lista [2, 3, 7, -1, -3, -4, -5, 8, 11, 20] soddisfa la condizione,
+//mentre la lista [2, 3, 7, -1, -3, -2] non la soddisfa. 
+//Il metodo verificaOrdinamento dovrà essere ricorsivo o invocare un opportuno metodo ricorsivo sulla classe NodoInt.
+	public boolean verificaOrdinamento() {
+		if(testa==null) {
+			return false;
+		}
+		return verificaOrdinamento(testa, testa.getSuccessivo(), true);
+	}
+	private boolean verificaOrdinamento(NodoInt nodo, NodoInt successivo, boolean condizione) {
+		if(successivo==null) {
+			return condizione;
+		}
+		if(nodo.getInfo()>0 && successivo.getInfo()>0 || nodo.getInfo()<0 && successivo.getInfo()>0 ) {
+			if(nodo.getInfo()<successivo.getInfo()) {
+				return verificaOrdinamento(successivo,successivo.getSuccessivo(),true);
+			}
+			condizione=false;
+		}
+		else if(nodo.getInfo()<0 && successivo.getInfo()<0 || nodo.getInfo()>0 && successivo.getInfo()<0) {
+			if(nodo.getInfo()>successivo.getInfo()) {
+				return verificaOrdinamento(successivo,successivo.getSuccessivo(),true);
+			}
+			condizione=false;
+		}
+		return condizione;
+	}
+	public static void main(String[] args) {
+		Integer []a={2,3,7-1,-3,-4,-5,8,11,20};
+		ListaConcatenataInt lista=new ListaConcatenataInt(a);
+		System.out.println("res: "+lista.verificaOrdinamento());
+	}
 	
 }

@@ -397,10 +397,38 @@ public class ListaConcatenataInt {
 		}
 		return condizione;
 	}
+//	public static void main(String[] args) {
+//		Integer []a={2,3,7-1,-3,-4,-5,8,11,20};
+//		ListaConcatenataInt lista=new ListaConcatenataInt(a);
+//		System.out.println("res: "+lista.verificaOrdinamento());
+//	}
+	
+	public int contaTriple() {
+		if(testa==null) {
+			return 0;
+		}
+		return contaTriple(testa,0);
+	}
+	private int contaTriple(NodoInt nodo,int contatore) {
+		while(nodo.getSuccessivo()!=null && nodo.getSuccessivo().getSuccessivo()!=null) {
+			if(nodo.getInfo()>0) {
+				return contaTriple(nodo.getSuccessivo(), contatore);
+			}
+			if(nodo.getSuccessivo().getInfo()!=0) {
+				return contaTriple(nodo.getSuccessivo(), contatore);
+			}
+			if(nodo.getSuccessivo().getSuccessivo().getInfo()<0) {
+				return contaTriple(nodo.getSuccessivo(), contatore);
+			}
+			contatore++;
+			return contaTriple(nodo.getSuccessivo(),contatore);
+		}
+		return contatore;
+	}
 	public static void main(String[] args) {
-		Integer []a={2,3,7-1,-3,-4,-5,8,11,20};
+		Integer []a={5,-1,0,2,-2,-4,0,1,-2,-3,0,3,0,-2,0,1};
 		ListaConcatenataInt lista=new ListaConcatenataInt(a);
-		System.out.println("res: "+lista.verificaOrdinamento());
+		System.out.println("res: "+lista.contaTriple());
 	}
 	
 }

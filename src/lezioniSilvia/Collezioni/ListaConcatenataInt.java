@@ -425,10 +425,102 @@ public class ListaConcatenataInt {
 		}
 		return contatore;
 	}
-	public static void main(String[] args) {
-		Integer []a={5,-1,0,2,-2,-4,0,1,-2,-3,0,3,0,-2,0,1};
-		ListaConcatenataInt lista=new ListaConcatenataInt(a);
-		System.out.println("res: "+lista.contaTriple());
+	
+	
+//	Si arricchisca la classe ListaConcatenataInt sviluppata durante il corso con un metodo boolean listaEquilibrata() che
+//	restituisce true se e solo se sono vere entrambe le seguenti condizioni:
+//	• il numero di elementi maggiori di zero è uguale al numero di elementi minori di zero;
+//	• la somma di tutti gli elementi è pari a zero.
+//	Ad esempio, se la lista contiene i valori [5,-3,-4,2,0,-4,4], allora il metodo restituisce true perché:
+//	• la lista contiene 3 elementi maggiori di zero e 3 elementi minori di zero;
+//	• la somma di tutti gli elementi è pari a zero.
+//	Il metodo listaEquilibrata dovrà essere ricorsivo o invocare un opportuno metodo ricorsivo sulla classe NodoInt	
+//	APPELLO 21 SETTEMBRE 2022
+	public boolean listaEquilibrata() {
+		if(testa==null) {
+			return false;
+		}
+		return listaEquilibrata(testa,0,0,0);
 	}
+	private boolean listaEquilibrata(NodoInt nodo, int negativi, int positivi, int somma) {
+		if(nodo==null) {
+			return (negativi==positivi && somma==0);
+		}
+		if(nodo.getInfo()>0) {
+			return listaEquilibrata(nodo.getSuccessivo(),negativi, positivi+1, somma+nodo.getInfo());
+		}
+		else if(nodo.getInfo()<0) {
+			return listaEquilibrata(nodo.getSuccessivo(), negativi+1,positivi,somma+nodo.getInfo());
+		}
+		else {
+			return listaEquilibrata(nodo.getSuccessivo(), negativi, positivi, somma);
+		}
+		
+	}
+//Si arricchisca la classe ListaConcatenataInt sviluppata durante il corso con un metodo verifica  che restituisca true se
+//e solo se lista è ordinata secondo il seguente criterio: ogni numero in posizione pari è maggiore del doppio 
+//dell’elemento che occupa la posizione pari precedente (se esiste), mentre ogni numero in posizione dispari è maggiore
+//del triplo dell’elemento che occupa la posizione dispari precedente (se esiste). 
+//Il metodo verifica dovrà essere ricorsivo o invocare un opportuno metodo ricorsivo sulla classe NodoInt. 
+//APPELLO 15/02/2022
+	public boolean verifica() {
+		if(testa==null && lunghezza<3) {
+			return false;
+		}
+		return verifica(testa,testa.getInfo(),testa.getSuccessivo().getInfo());
+	}
+	public boolean verifica(NodoInt nodo, int precedentePari, int precedenteDispari) {
+		if(nodo.getSuccessivo()==null || nodo.getSuccessivo().getSuccessivo()==null || nodo.getSuccessivo().getSuccessivo().getSuccessivo()==null) {
+			return true;
+		}
+		NodoInt successivo=nodo.getSuccessivo().getSuccessivo();
+		if(successivo.getInfo()>2*precedentePari && successivo.getSuccessivo().getInfo()>3*precedenteDispari) {
+			return verifica(successivo, successivo.getInfo(),successivo.getSuccessivo().getInfo());
+		}
+		return false;
+	}
+	
+	public boolean verifica2() {
+		if(testa==null && lunghezza<3) {
+			return false;
+		}
+		return verifica2(testa.getSuccessivo().getSuccessivo(),testa.getInfo(),testa.getSuccessivo().getInfo(),true);
+	}
+	private boolean verifica2(NodoInt nodo, int precedentePari, int precedenteDispari, boolean isPari) {
+		if(nodo==null) {
+			return true;
+		}
+		else if(isPari) {
+			if(nodo.getInfo()>precedentePari*2) {
+				return verifica2(nodo.getSuccessivo(),nodo.getInfo(),precedenteDispari,false);
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			if(nodo.getInfo()>precedenteDispari*3) {
+				return verifica2(nodo.getSuccessivo(),precedentePari,nodo.getInfo(),true);
+			}
+			else{
+				return false;
+			}
+		}
+	}
+	public static void main(String[] args) {
+		Integer []a={1,2,3,7,10,22,21,67};
+		ListaConcatenataInt lista=new ListaConcatenataInt(a);
+		System.out.println("res: "+lista.verifica2());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

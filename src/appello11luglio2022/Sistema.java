@@ -85,31 +85,56 @@ public class Sistema {
 			return null;
 		}
 		LinkedList<String> res= new LinkedList<>();
-		for(Merce m: merci) {
-			
+		LinkedList<Ordine> ordiniInData= troviamoOrdini(d1,d2);
+		float massimo=calcolaImporto(ordiniInData.get(0));
+		res.add(tornaMarca(ordiniInData.get(0)));
+		for(int i=1; i<ordiniInData.size(); i++) {
+			if(massimo<calcolaImporto(ordiniInData.get(i)) && !res.contains(tornaMarca(ordiniInData.get(i)))){
+				massimo=calcolaImporto(ordiniInData.get(i));
+				res.clear();
+				res.add(tornaMarca(ordiniInData.get(i)));
+			}
+			else if(massimo==calcolaImporto(ordiniInData.get(i))&& !res.contains(tornaMarca(ordiniInData.get(i)))) {
+				res.add(tornaMarca(ordiniInData.get(i)));
+			}
 		}
-		
 		return res;
 	}
-	private float calcolaImporto(LinkedList<Float> listaPrezzi, LinkedList<String> listaFornitori,int d1, int d2) {
-		LinkedList<Float> listaImporti= new LinkedList<>();
-		float massimo=0;
-		for(int i=0; i<listaPrezzi.size(); i++) {
-			for(Ordine or: ordini) {
-				if(listaFornitori.get(i).equals(or.getFornitore())&& d1>=or.getData() && d2<=or.getData()) {
-					listaImporti.add(or.getQuantita()*listaPrezzi.get(i));
-				}
-				ListIterator<Float> it=listaImporti.listIterator();
-				massimo=it.next();
-				while(it.hasNext()) {
-					float t1=it.next();
-					if(massimo>t1) {
-						massimo=t1;
+	private LinkedList<Ordine> troviamoOrdini(int d1, int d2){
+		LinkedList<Ordine> res= new LinkedList<>();
+		for(Ordine or: ordini) {
+			if(or.getData()>=d1 && or.getData()<=d2) {
+				res.add(or);
+			}
+		}
+		return res;
+	}
+	private float calcolaImporto(Ordine or) {
+		float importo=0;
+		String merce=or.getMerce();
+		String fornitore=or.getFornitore();
+		int quantita=or.getQuantita();
+		for(Merce m: merci) {
+			if(m.getNome().equals(merce)) {
+				int i=0;
+				for(String s: m.getListaFornitori()) {
+					if(fornitore.equals(s)) {
+						importo=quantita*m.getListaPrezzi().get(i); 
 					}
+					i++;
 				}
 			}
 		}
-		return massimo;
+		return importo;
+	}
+	private String tornaMarca(Ordine or) {
+		String nomeMarca=null;
+		for(Merce m:merci) {
+			if(m.getNome().equals(or.getMerce())) {
+				nomeMarca=m.getMarca();
+			}
+		}
+		return nomeMarca;
 	}
 	
 }

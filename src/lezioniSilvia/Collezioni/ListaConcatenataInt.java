@@ -507,16 +507,84 @@ public class ListaConcatenataInt {
 			}
 		}
 	}
-	public static void main(String[] args) {
-		Integer []a={1,2,3,7,10,22,21,67};
-		ListaConcatenataInt lista=new ListaConcatenataInt(a);
-		System.out.println("res: "+lista.verifica2());
+	
+	
+//Si arricchisca la classe ListaConcatenataInt sviluppata durante il corso con un metodo ordinataTratti che restituisca 
+//true se e solo se lista è “ordinata a tratti”. Ossia, scorrendo la lista dall’inizio alla fine, i valori devono essere 
+//ordinati in senso crescente fino a che non viene incontrato il numero “delimitatore” 0 o viene raggiunta la fine 
+//della lista. Dopo ogni occorrenza del delimitatore 0, il senso di ordinamento viene invertito: se prima era crescente, 
+//diventa decrescente; se prima era decrescente, diventa crescente. Si assuma che nel primo tratto l’ordinamento debba 
+//essere crescente. Si assuma inoltre che una lista vuota soddisfi la proprietà verificata da ordinataTratti. 
+//Il metodo ordinataTratti dovrà essere ricorsivo o invocare un opportuno metodo ricorsivo sulla classe NodoInt. 
+//APPELLO 27/01/2021
+	public boolean ordinataTratti() {
+		if(testa==null){
+			return false;
+		}
+		return ordinataTratti(testa,testa.getSuccessivo(),true);
 	}
-	
-	
-	
-	
-	
+	private boolean ordinataTratti(NodoInt nodo, NodoInt successivo, boolean crescente) {
+		if(nodo!=null && successivo!=null) {
+			if(crescente) {
+				if(nodo.getInfo()<successivo.getInfo() && successivo.getInfo()!=0) {
+					return ordinataTratti(nodo.getSuccessivo(), successivo.getSuccessivo(), true);
+				}
+				else if(successivo.getInfo()==0) {
+					return ordinataTratti(nodo.getSuccessivo().getSuccessivo(), successivo.getSuccessivo().getSuccessivo(), false);
+				}
+				else{
+					return false;
+				}
+			}
+			else {
+				if(nodo.getInfo()>successivo.getInfo() && successivo.getInfo()!=0) {
+					return ordinataTratti(nodo.getSuccessivo(), successivo.getSuccessivo(), false);
+				}
+				else if(successivo.getInfo()==0) {
+					return ordinataTratti(nodo.getSuccessivo().getSuccessivo(), successivo.getSuccessivo().getSuccessivo(), true);
+				}
+				else{
+					return false;
+				}
+			}		
+		}
+		return true;
+	}
+
+//Si arricchisca la classe ListaConcatenataInt sviluppata durante il corso con un metodo contaElementi che restituisca 
+//il numero di elementi della lista che sono minori o uguali alla media aritmetica tra l’elemento precedente e l’elemento 
+//successivo. Si assuma che il primo elemento della lista è preceduto da 0 e che all’ultimo elemento della lista succede 
+//il valore 0. Il metodo contaElementi dovrà essere ricorsivo o invocare un opportuno metodo ricorsivo sulla classe NodoInt. 
+//APPELLO 23 LUGLIO 2020
+	public int contaElementi() {
+		if(testa==null) {
+			return 0;
+		}
+		if (lunghezza==1) {
+			return contaElementi(testa,0,0);
+		}
+		return contaElementi(testa,0,testa.getSuccessivo().getInfo());
+	}
+	private int contaElementi(NodoInt nodo, int precedente, int successivo) {
+		int contatore=0;
+		if(nodo.getInfo()<=(precedente+successivo)/2) {
+			contatore++;
+		}
+		NodoInt nodoSuccessivo=nodo.getSuccessivo();
+		if(nodoSuccessivo!= null) {
+			if(nodoSuccessivo.getSuccessivo()!= null)
+				return contatore+contaElementi(nodoSuccessivo, nodo.getInfo(), nodoSuccessivo.getSuccessivo().getInfo());
+			else {
+				return contatore+contaElementi(nodoSuccessivo, nodo.getInfo(),0);
+			}
+		}
+		return contatore;
+	}
+	public static void main(String[] args) {
+		Integer []a={1,5,3,6,11,4};
+		ListaConcatenataInt lista=new ListaConcatenataInt(a);
+		System.out.println("res: "+lista.contaElementi());
+	}
 	
 	
 	

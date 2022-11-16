@@ -3,11 +3,11 @@ import java.util.*;
 public class Main {
 	public static void main(String []args) {
 		Tecnico t1= new Tecnico("Mario", 20);
-		Tecnico t2= new Tecnico("Giovanni", 30);
+		Tecnico t2= new Tecnico("Giovanni", 10);
 		Tecnico t3= new Tecnico("Luca", 15);
 		
 		LinkedList<String> l1= new LinkedList<>();
-		l1.add("Riparazione"); l1.add("Manutenzione");
+		l1.add("Riparazione"); 
 		LinkedList<String> l2= new LinkedList<>();
 		l2.add("Riparazione");
 		LinkedList<String> l3= new LinkedList<>();

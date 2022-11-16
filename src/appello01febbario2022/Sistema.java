@@ -30,7 +30,7 @@ public class Sistema {
 				costo=t.getCostoOrario()*somma;
 			}
 		}
-//		System.out.println("Il tecnico "+nomeTecnico+" ha un costo complessivo di: "+costo);
+		//System.out.println("Il tecnico "+nomeTecnico+" ha un costo complessivo di: "+costo);
 		return costo;
 	}
 	public LinkedList<String> tecniciRiparatori(int r){
@@ -60,15 +60,16 @@ public class Sistema {
 		LinkedList<String> res= new LinkedList<>();
 		LinkedList<String> nomiTecnici= tecniciConCostoOrarioMinore(cm);
 		for(Intervento i: interventi) {
-			for(int j=0; j<nomiTecnici.size(); j++) {
-				if(nomiTecnici.get(j).equals(i.getNomeTecnico())) {
-					int conta=contaOperazioniDiverse(nomiTecnici.get(j));
-					if(conta>=t1 && !res.contains(nomiTecnici.get(j))) {
-						res.add(nomiTecnici.get(j));
+			if(i.getData()>=d1 && i.getData()<=d2) {
+				for(int j=0; j<nomiTecnici.size(); j++) {
+					if(nomiTecnici.get(j).equals(i.getNomeTecnico())) {
+						int conta=contaOperazioniDiverse(nomiTecnici.get(j));
+						if(conta>=t1 && !res.contains(nomiTecnici.get(j))) {
+							res.add(nomiTecnici.get(j));
+						}
 					}
 				}
 			}
-		
 		}	
 		return res;
 		
@@ -85,22 +86,16 @@ public class Sistema {
 	}
 	private int contaOperazioniDiverse(String nome) {
 		LinkedList<String> lista= new LinkedList<>();
-		int contatore=1;
 		for (Intervento i: interventi) {
+			LinkedList<String> tipi=i.getTipiOperazione();
 			if(nome.equals(i.getNomeTecnico())) {
-				lista.addAll(i.getTipiOperazione());
-				//System.out.println("Quali sono le operazioni di "+nome+"? "+lista);
-				String operazione=lista.get(0);
-				//System.out.println("Di quale operazione parliamo? "+operazione);
-				for(int j=1; j<lista.size(); j++) {
-					//System.out.println(!operazione.equals(lista.get(j)));
-					if(!operazione.equals(lista.get(j))) {
-						contatore++;
+				for(int j=0; j<tipi.size(); j++) {
+					if(!lista.contains(tipi.get(j))) {
+						lista.add(tipi.get(j));
 					}
 				}
 			}
 		}
-		//System.out.println(contatore);
-		return contatore;
+		return lista.size();
 	}
 }

@@ -580,15 +580,95 @@ public class ListaConcatenataInt {
 		}
 		return contatore;
 	}
-	public static void main(String[] args) {
-		Integer []a={1,5,3,6,11,4};
-		ListaConcatenataInt lista=new ListaConcatenataInt(a);
-		System.out.println("res: "+lista.contaElementi());
+	
+//Si arricchisca la classe ListaConcatenataInt sviluppata durante il corso con un metodo verifica() che restituisce true
+//se e solo se la lista contiene esattamente una volta il valore zero e, dopo di esso, non contiene valori negativi.
+//Il metodo verifica dovrà essere ricorsivo o invocare un opportuno metodo ricorsivo sulla classe NodoInt.
+//APPELLO 20 LUGLIO 2021
+	public boolean verifica1() {
+		if(testa==null) {
+			return false;
+		}
+		return verifica1(testa,true);
 	}
-	
-	
-	
-	
-	
-	
+	private boolean verifica1(NodoInt nodo, boolean bc) {
+		if(nodo!=null) {
+			if(bc) {
+				if(nodo.getInfo()==0) {
+					return verifica1(nodo.getSuccessivo(),false);
+				}
+			}
+			else {
+				if(nodo.getInfo()==0) {
+					return false;
+				}                               //oppure if(nodo.getInfo()<1)
+				else if(nodo.getInfo()<0) {
+					return false;
+				}
+				else {
+					return verifica1(nodo.getSuccessivo(), false);
+				}
+			}
+		}
+		return true;
+	}
+//Si arricchisca la classe ListaConcatenataInt sviluppata durante il corso con un metodo alternati che restituisca true se 
+//e solo se, scorrendo la lista dall’inizio alla fine, si incontrano valori alternati positivi e negativi. 
+//In altri termini, per ogni nodo deve valere che: se esso contiene un valore positivo, allora il successivo (se esiste) 
+//contiene un valore negativo, e viceversa. Si assuma inoltre che una lista vuota soddisfi la proprietà verificata 
+//da alternati. 
+//Il metodo alternati dovrà essere ricorsivo o invocare un opportuno metodo ricorsivo sulla classe NodoInt. 	
+//APPELLO 03 LUGLIO 2020
+	public boolean alternati() {
+		if(testa==null) {
+			return true;
+		}
+		return alternati(testa,testa.getSuccessivo());
+	}
+	private boolean alternati(NodoInt nodo, NodoInt successivo) {
+		if(nodo!=null || successivo!=null) {
+			if(nodo.getInfo()<0 && successivo.getInfo()>0) {
+				return alternati(nodo.getSuccessivo(), successivo.getSuccessivo());
+			}
+			else if(nodo.getInfo()>0 && successivo.getInfo()<0) {
+				return alternati(nodo.getSuccessivo(), successivo.getSuccessivo());
+			}
+			else {
+				return false;
+			}
+		}
+		return true;
+	}
+//Si arricchisca la classe ListaConcatenataInt sviluppata durante il corso con un metodo stesseSottosequenze che
+//restituisca true se e solo se sono verificate entrambe le seguenti condizioni:
+//	1.	la lista non è vuota e la sua lunghezza è pari;
+//	2.	se un nodo (ad eccezione degli ultimi due) si trova in posizione i  e contiene il valore n, allora il nodo che si trova in posizione i+2 contiene lo stesso valore n.
+//Ad esempio, la lista [7,2,7,2,7,2] soddisfa entrambe le condizioni di cui sopra. 
+//Il metodo stesseSottosequenze dovrà essere ricorsivo o invocare un opportuno metodo ricorsivo sulla classe NodoInt. 
+//APPELLO 16 SETTEMBRE 2020
+	public boolean stesseSottosequenze() {
+		if(testa==null) {
+			return false;
+		}
+		if(lunghezza%2!=0) {
+			return false;
+		}
+		return stesseSottosequenze(testa,testa.getSuccessivo(),testa.getSuccessivo().getSuccessivo());
+	}
+	private boolean stesseSottosequenze(NodoInt nodo, NodoInt dispari, NodoInt pari) {
+		if(pari!=null) {
+			if(nodo.getInfo()==pari.getInfo()) {
+				return stesseSottosequenze(dispari,pari,pari.getSuccessivo());
+			}
+			else {
+				return false;
+			}
+		}
+		return true;
+	}
+	public static void main(String[] args) {
+		Integer []a={7,2,7,2,7,2};
+		ListaConcatenataInt lista=new ListaConcatenataInt(a);
+		System.out.println("res: "+lista.stesseSottosequenze());
+	}
 }

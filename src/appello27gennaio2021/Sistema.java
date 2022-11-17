@@ -62,12 +62,12 @@ public class Sistema {
 			LinkedList<String> citta= new LinkedList<>();
 			for(int i=0; i<fornitori.size(); i++) {
 				String cittaFornitore=cittaFornitore(fornitori.get(i));
-				if(!cittaFornitore.contains(cittaFornitore)) {
+				if(!citta.contains(cittaFornitore)) {
 					citta.add(cittaFornitore);
 				}
 			}
 			if(citta.size()>=2) {
-				res.add(m.getMarca());
+				res.add(m.getNome());
 			}
 		}
 		return res;
@@ -76,7 +76,7 @@ public class Sistema {
 		String nomeCitta=null;
 		for(Fornitore f: fornitori) {
 			if(f.getNome().equals(nome)) {
-				nomeCitta=f.getCitta();
+				return f.getCitta();
 			}
 		}
 		return nomeCitta;
